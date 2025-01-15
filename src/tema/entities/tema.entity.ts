@@ -6,8 +6,8 @@ import { Postagem } from "../../postagem/entities/postagem.entity";
 @Entity({name: 'tb_temas'})
 export class Tema {
 
-    @OneToMany(() => Postagem, (postagem) => postagem.tema)
-    postagem: Postagem[] //Cria um array de objetos postagem, que recebe os dados das postagens associadas a cada objeto de tema
+    @OneToMany((/* tema se relaciona com */) => Postagem /* entidade */, (postagem) /* objeto */ => postagem.tema)
+    postagem: Postagem[] //Cria um array de objetos postagem pra visualizar, pq um tema pode ter 1 ou mais postagens
 
     @PrimaryGeneratedColumn()
     id: number;

@@ -21,6 +21,7 @@ export class TemaService {
             where: { id },
             relations: {postagem: true} 
             //Além de exibir os objetos de tema, também exibe os objetos de postagem associados a tema
+            //Faz o INNER JOIN
         });
             
         if(!tema)

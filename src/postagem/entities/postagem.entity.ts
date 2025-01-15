@@ -7,9 +7,11 @@ import { Tema } from "../../tema/entities/tema.entity";
 export class Postagem {
 
     @ManyToOne(() => Tema, (tema) => tema.postagem, {
-        onDelete: "CASCADE"
+        onDelete: "CASCADE" //sempre q um tema for deletado, 
+        // as postagens desse tema também serão deletadas
+        //configurado sempre do lado N da relação
     })
-    tema: Tema
+    tema: Tema //foreign key
 
     @PrimaryGeneratedColumn() //auto_increment pk
     id: number;
