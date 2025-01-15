@@ -20,14 +20,7 @@ export class PostagemController{
     findById(@Param("id", ParseIntPipe) id: number): Promise<Postagem>{
         return this.postagemService.findById(id);
     }
-    //O parametro passado na URL, vai ser guardado na variável id. Precisa converter para int dnv, pq é recebido como string na URL
-
-    @Get("/titulo/:titulo") //o primeiro é o caminho, o outro é a variável q estou procurando
-    @HttpCode(HttpStatus.OK)
-    findByTitulo(@Param("titulo") titulo: string): Promise<Postagem[]>{
-        return this.postagemService.findByTitulo(titulo);
-    }
-
+    
     @Post() //@Body - procura no corpo da requisição
     @HttpCode(HttpStatus.CREATED)
     create(@Body() postagem: Postagem): Promise<Postagem>{
