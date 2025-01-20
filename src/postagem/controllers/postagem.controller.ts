@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { PostagemService } from "../services/postagem.service";
 import { Postagem } from "../entities/postagem.entity";
+import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 
+@UseGuards(JwtAuthGuard)
 @Controller("/postagens")
 export class PostagemController{
 
@@ -19,6 +21,12 @@ export class PostagemController{
     @HttpCode(HttpStatus.OK)
     findById(@Param("id", ParseIntPipe) id: number): Promise<Postagem>{
         return this.postagemService.findById(id);
+    }
+
+    @Get("/titulo/:titulo")
+    @HttpCode(HttpStatus.OK)
+    findByTitulo(@Param("titulo") titulo: string): Promise<Postagem[]>{
+        return this.postagemService.findByTitulo(titulo);
     }
     
     @Post() //@Body - procura no corpo da requisição
