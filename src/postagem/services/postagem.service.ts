@@ -15,7 +15,7 @@ export class PostagemService {
 
     async findAll(): Promise<Postagem[]> {
         return this.postagemRepository.find({
-            relations: {tema: true}
+            relations: {tema: true, usuario: true}
         });
     }
 
@@ -25,7 +25,7 @@ export class PostagemService {
         // SELECT * FROM postagem WHERE id = x
         const postagem = await this.postagemRepository.findOne({
             where: { id },
-            relations: {tema: true}
+            relations: {tema: true, usuario: true}
         })
         
         if(!postagem)
@@ -37,7 +37,7 @@ export class PostagemService {
     async findByTitulo(titulo: string): Promise<Postagem[]> {
         return this.postagemRepository.find({
             where: { titulo: ILike(`%${titulo}%`)}, //insensitive like
-            relations: {tema: true}
+            relations: {tema: true, usuario: true}
         });
     }
 
@@ -58,9 +58,7 @@ export class PostagemService {
         
         // Atualiza os dados da postagem
         return await this.postagemRepository.save(postagem);
-        
-        // Atualiza os dados da postagem
-        return await this.postagemRepository.save(postagem);
+
     }
 
     async delete(id: number): Promise<DeleteResult> {
