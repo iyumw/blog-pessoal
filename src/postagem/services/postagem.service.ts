@@ -41,6 +41,13 @@ export class PostagemService {
         });
     }
 
+    async findByUser(usuarioId: number): Promise<Postagem[]> {
+        return this.postagemRepository.find({
+            where: { usuario: { id: usuarioId } }, // Filtra as postagens pelo ID do usuário
+            relations: { tema: true, usuario: true }, // Inclui os relacionamentos com tema e usuário
+        });
+    }
+
     async create(postagem: Postagem): Promise<Postagem> {
         // Verifica se o tema existe antes de salvar a postagem
         await this.temaService.findById(postagem.tema.id)

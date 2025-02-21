@@ -31,6 +31,12 @@ export class PostagemController{
     findByTitulo(@Param("titulo") titulo: string): Promise<Postagem[]>{
         return this.postagemService.findByTitulo(titulo);
     }
+
+    @Get("/usuario/:usuarioId")
+    @HttpCode(HttpStatus.OK)
+    findByUser(@Param("usuarioId", ParseIntPipe) usuarioId: number): Promise<Postagem[]>{
+        return this.postagemService.findByUser(usuarioId);
+    }
     
     @Post() //@Body - procura no corpo da requisição
     @HttpCode(HttpStatus.CREATED)

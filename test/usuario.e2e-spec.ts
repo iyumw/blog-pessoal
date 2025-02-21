@@ -105,6 +105,5 @@ describe('Testes dos Módulos Usuário e Auth (e2e)', () => {
       expect(usuarioId).toEqual(resposta.body.id)
     })
     })
-    
   
 });
